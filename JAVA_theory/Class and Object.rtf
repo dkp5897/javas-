@@ -1,0 +1,183 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Times New Roman;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\b\f0\fs40\lang9 Classes and Objects in Java\par
+\b0\fs28 Difficulty Level : Medium\par
+Last Updated : 28 Jun, 2021\par
+ \par
+ \par
+Classes and Objects are basic concepts of Object Oriented Programming which revolve around the real life entities.\par
+\par
+\b\fs40 Class\b0\fs28\par
+A class is a user defined blueprint or prototype from which objects are created.  It represents the set of properties or methods that are common to all objects of one type. In general, class declarations can include these components, in order: \par
+\par
+Modifiers: A class can be public or has default access (Refer this for details).\par
+class keyword: class keyword is used to create a class.\par
+Class name: The name should begin with an initial letter (capitalized by convention).\par
+Superclass(if any): The name of the class\rquote s parent (superclass), if any, preceded by the keyword extends. A class can only extend (subclass) one parent.\par
+Interfaces(if any): A comma-separated list of interfaces implemented by the class, if any, preceded by the keyword implements. A class can implement more than one interface.\par
+Body: The class body surrounded by braces, \{ \}.\par
+Constructors are used for initializing new objects. Fields are variables that provides the state of the class and its objects, and methods are used to implement the behavior of the class and its objects.\par
+There are various types of classes that are used in real time applications such as nested classes, anonymous classes, lambda expressions. \par
+\par
+\b\fs40 Object\par
+\b0\fs28 It is a basic unit of Object-Oriented Programming and represents the real life entities.  A typical Java program creates many objects, which as you know, interact by invoking methods. An object consists of : \par
+\par
+State: It is represented by attributes of an object. It also reflects the properties of an object.\par
+Behavior: It is represented by methods of an object. It also reflects the response of an object with other objects.\par
+Identity: It gives a unique name to an object and enables one object to interact with other objects.\par
+Example of an object: dog\par
+\par
+Blank Diagram - Page 1 (5)\par
+\par
+Objects correspond to things found in the real world. For example, a graphics program may have objects such as \ldblquote circle\rdblquote , \ldblquote square\rdblquote , \ldblquote menu\rdblquote . An online shopping system might have objects such as \ldblquote shopping cart\rdblquote , \ldblquote customer\rdblquote , and \ldblquote product\rdblquote . \par
+ \par
+\par
+Declaring Objects (Also called instantiating a class)\par
+When an object of a class is created, the class is said to be instantiated. All the instances share the attributes and the behavior of the class. But the values of those attributes, i.e. the state are unique for each object. A single class may have any number of instances.\par
+\par
+Example: \par
+\par
+Blank Diagram - Page 1 (3)\par
+\par
+As we declare variables like (type name;). This notifies the compiler that we will use name to refer to data whose type is type. With a primitive variable, this declaration also reserves the proper amount of memory for the variable. So for reference variable, type must be strictly a concrete class name. In general, we can\rquote t create objects of an abstract class or an interface.  \par
+\par
+Dog tuffy;\par
+If we declare reference variable(tuffy) like this, its value will be undetermined(null) until an object is actually created and assigned to it. Simply declaring a reference variable does not create an object.\par
+ \par
+\par
+Initializing an object\par
+The new operator instantiates a class by allocating memory for a new object and returning a reference to that memory. The new operator also invokes the class constructor. \par
+\par
+\par
+// Class Declaration\par
+ \par
+public class Dog\par
+\{\par
+    // Instance Variables\par
+    String name;\par
+    String breed;\par
+    int age;\par
+    String color;\par
+ \par
+    // Constructor Declaration of Class\par
+    public Dog(String name, String breed,\par
+                   int age, String color)\par
+    \{\par
+        this.name = name;\par
+        this.breed = breed;\par
+        this.age = age;\par
+        this.color = color;\par
+    \}\par
+ \par
+    // method 1\par
+    public String getName()\par
+    \{\par
+        return name;\par
+    \}\par
+ \par
+    // method 2\par
+    public String getBreed()\par
+    \{\par
+        return breed;\par
+    \}\par
+ \par
+    // method 3\par
+    public int getAge()\par
+    \{\par
+        return age;\par
+    \}\par
+ \par
+    // method 4\par
+    public String getColor()\par
+    \{\par
+        return color;\par
+    \}\par
+ \par
+    @Override\par
+    public String toString()\par
+    \{\par
+        return("Hi my name is "+ this.getName()+\par
+               ".\\nMy breed,age and color are " +\par
+               this.getBreed()+"," + this.getAge()+\par
+               ","+ this.getColor());\par
+    \}\par
+ \par
+    public static void main(String[] args)\par
+    \{\par
+        Dog tuffy = new Dog("tuffy","papillon", 5, "white");\par
+        System.out.println(tuffy.toString());\par
+    \}\par
+\}\par
+Output: \par
+\par
+Hi my name is tuffy.\par
+My breed,age and color are papillon,5,white\par
+This class contains a single constructor. We can recognize a constructor because its declaration uses the same name as the class and it has no return type. The Java compiler differentiates the constructors based on the number and the type of the arguments. The constructor in the Dog class takes four arguments. The following statement provides \ldblquote tuffy\rdblquote ,\rdblquote papillon\rdblquote ,5,\rdblquote white\rdblquote  as values for those arguments:\par
+Dog tuffy = new Dog("tuffy","papillon",5, "white");\par
+The result of executing this statement can be illustrated as :\par
+Untitled\par
+\par
+Note : All classes have at least one constructor. If a class does not explicitly declare any, the Java compiler automatically provides a no-argument constructor, also called the default constructor. This default constructor calls the class parent\rquote s no-argument constructor (as it contain only one statement i.e super();), or the Object class constructor if the class has no other parent (as Object class is parent of all classes either directly or indirectly). \par
+\par
+ \par
+Ways to create object of a class\par
+There are four ways to create objects in java.Strictly speaking there is only one way(by using new keyword),and the rest internally use new keyword. \par
+\par
+Using new keyword: It is the most common and general way to create object in java. Example:\par
+// creating object of class Test\par
+Test t = new Test();\par
+Using Class.forName(String className) method: There is a pre-defined class in java.lang package with name Class. The forName(String className) method returns the Class object associated with the class with the given string name.We have to give the fully qualified name for a class. On calling new Instance() method on this Class object returns new instance of the class with the given string name.\par
+// creating object of public class Test\par
+// consider class Test present in com.p1 package\par
+Test obj = (Test)Class.forName("com.p1.Test").newInstance();\par
+Using clone() method: clone() method is present in Object class. It creates and returns a copy of the object.\par
+        \par
+// creating object of class Test\par
+Test t1 = new Test();\par
+\par
+// creating clone of above object\par
+Test t2 = (Test)t1.clone();\par
+Deserialization: De-serialization is technique of reading an object from the saved state in a file. Refer Serialization/De-Serialization in java\par
+            \par
+FileInputStream file = new FileInputStream(filename);\par
+ObjectInputStream in = new ObjectInputStream(file);\par
+Object obj = in.readObject();\par
+Creating multiple objects by one type only (A good practice) \par
+In real-time, we need different objects of a class in different methods. Creating a number of references for storing them is not a good practice and therefore we declare a static reference variable and use it whenever required. In this case, wastage of memory is less. The objects that are not referenced anymore will be destroyed by Garbage Collector of java. Example:\par
+          \par
+Test test = new Test();\par
+test = new Test();\par
+In inheritance system, we use parent class reference variable to store a sub-class object. In this case, we can switch into different subclass objects using same referenced variable. Example:\par
+class Animal \{\}\par
+\par
+class Dog extends Animal \{\}\par
+class Cat extends Animal \{\}\par
+\par
+public class Test\par
+\{\par
+    // using Dog object\par
+    Animal obj = new Dog();\par
+\par
+    // using Cat object\par
+    obj = new Cat();\par
+\}       \par
+Anonymous objects\par
+Anonymous objects are the objects that are instantiated but are not stored in a reference variable.  \par
+\par
+They are used for immediate method calling.\par
+They will be destroyed after method calling.\par
+They are widely used in different libraries. For example, in AWT libraries, they are used to perform some action on capturing an event(eg a key press).\par
+In the example below, when a key is button(referred by the btn) is pressed, we are simply creating anonymous object of EventHandler class for just calling handle method.\par
+btn.setOnAction(new EventHandler()\par
+\{\par
+    public void handle(ActionEvent event)\par
+    \{\par
+        System.out.println("Hello World!");\par
+    \}\par
+\});\par
+This article is contributed by Gaurav Miglani. If you like GeeksforGeeks and would like to contribute, you can also write an article using write.geeksforgeeks.org or mail your article to review-team@geeksforgeeks.org. See your article appearing on the GeeksforGeeks main page and help other Geeks.\par
+Please write comments if you find anything incorrect, or you want to share more information about the topic discussed above.\par
+ \par
+\par
+}
+ 
