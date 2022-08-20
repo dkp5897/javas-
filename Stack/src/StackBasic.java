@@ -8,7 +8,8 @@ public class StackBasic {
 		
 		S.push(1);
 		S.push(2);
-		S.push(3);
+		S.push(6);
+		S.push(5);
 		System.out.print("The element in the Stack: ");
 		System.out.print(S+" "+"\n");
 		System.out.println("Size of Stack :  "+S.size());

@@ -16376,3 +16376,2619 @@ DONE:
 
 
 
+
+
+
+
+
+Date : 30th May 2022
+Mentor: DEVANG SHARMA
+Batch: March Batch 2 - DRACO
+
+Agenda:
+
+(1) Introduction to Linked List- DONE
+(2) Linked List vs Array - DONE
+(3) Linked List Insertion - DONE
+(4) TRAVERSAL: Printing Linked List - DONE
+(5) Calculate Length -- Iterative - DONE
+(6) Calculate Length -- Recursive - HW()- DONE
+(7) Search in a Linked List -- Iterative, Recursive -- DONE
+(8) Delete a Linked List - DONE
+(9) Nth Node in a Linked List -- DONE
+(10) Kth Node from End in Linked List -- Two Approaches (Two Traversals and Single Traversal)
+(11) Middle of Linked List -- Two Approaches (Two Traversals and Single Traversals)
+(12) Detect Cycle in a Linked List - With Hashing - DONE
+(13) Detect Cycle in a Linked List - Without Hashing - DONE
+(14) Sorting Algos - DONE
+- Max Prod Subarray: LC: DONE
+
+TODO:
+- Assignment Questions: DONE
+- Dynamic Programming
+- OOPS
+
+"Please Type 'Hi' in the Chat Box if you have joined and Can See this Screen".
+
+
+
+
+
+
+
+3rd June: Informal Session (45 Mins - 1 Hr)
+5th June: Contest (Sunday - Shuffling) 
+9th June: Shuffling
+Till 10th June: Classes 
+
+DSA1: DONE
+DSA2: DONE
+
+DSA3: Advanced DSA
+- DP (Dynamic Programming)
+- Backtracking
+- Trees
+- Graphs
+
+FE: HTML, CSS, JS, React, Redux
+BE: Sql, Nodejs, MongodB
+
+Placement: 2 Months
+
+
+Big Tech: Specialists - BE, FE, Full Stack
+
+Startups: Generalists - SWE
+
+Salary: 3 Yrs: SDE -1:2
+
+Product: 
+
+
+
+
+- Assignment Questions
+
+
+
+
+
+
+Q: Bit Manipulation - In Class - Minimize XOR
+
+Minimize XOR
+Time Limit: 2 sec
+Memory Limit: 128000 kB
+
+Problem Statement
+
+Given an integer array A of N integers, 
+find the pair of integers in the array which have minimum XOR value. 
+Report the minimum XOR value.
+
+Input
+
+First line denotes N, the size of the array.
+Next line denotes N space-separated array elements.
+
+Constraints:
+2 <= N <= 100000
+0 <= A[i] <= 10^7
+
+Output
+
+Print a single integer denoting minimum xor value
+Example
+
+Sample Input
+4
+0 2 5 7
+
+Sample Output
+2
+
+Explanation:
+0 xor 2 = 2
+
+Sample Input
+
+4
+0 4 7 9
+
+Sample Output
+3
+
+
+
+
+
+
+Solutions:
+
+
+(1) Brute Force Solution: Two Nested Loops
+
+- For Each pair, Calculate XOR and Find the Minimum
+
+TC: O(N^2)
+SC: O(1)
+
+
+(2) Optimised Solution:
+A ^ A = 0: Min
+
+Same Input, XOR = 0
+Diff Input, XOR = 1
+
+A ^ B: Min: A == B
+
+
+A close to B: Min XOR - Intuition
+A far from B: Max XOR
+
+
+
+
+Sort the Array: 
+(1) All Close Elements will become together
+(2) Iterate Over Adjacent values and find the Min XOR
+
+
+a = [5 2 0 7]
+After Sorting: [0 2 5 7]
+
+Min XOR: 0^2 = 2
+
+
+Approach:
+
+(1) Sort the Array
+(2) Calculate: arr[i] ^ arr[i+1]: Contiguous Values
+(3) Find Minimum
+
+TC: O(NlogN)
+SC: O(1)
+
+
+CODE:
+
+
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+class Main {
+    static int minXOR(int [] A, int N) 
+    {
+        Arrays.sort(A);  // for sorting the array
+        int minimumxor = Integer.MAX_VALUE;
+        int value = 0;
+        for(int i=0; i<N-1; i++) {
+            value = A[i]^A[i+1];
+            minimumxor = Math.min(minimumxor, value);  // to find minimum pair
+        }
+        return minimumxor;
+    }
+
+    public static void main (String[] args) 
+    {
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        int [] A = new int[N];
+
+        for(int i=0; i<N; i++) {
+            A[i] = input.nextInt();
+        }
+        
+        System.out.println(minXOR(A, N));
+    }
+}
+
+
+TC: O(NlogN)
+SC: O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMP:
+Q: Two Pointers - In Class - Max subarray sum (size K)
+https://my.newtonschool.co/playground/code/x8oof6sc2xnx/
+
+
+Max subarray sum (size K)
+
+Time Limit: 2 sec
+Memory Limit: 128000 kB
+
+Problem Statement
+Given an array of integers A and a number K, 
+find maximum sum of a subarray of size K.
+
+Input
+The first line of input contains two integers N and K, denoting the number of elements in the array and the subarray size respectively.
+The next line contains N integers denoting the elements of the array respectively.
+
+1 <= K <= N <= 200000
+-200000 <= A[i] <= 200000
+
+Output
+Print a single integer denoting the maximum sum of subarray of size K.
+
+Example
+
+Sample Input:
+4 2
+-1 5 2 -3
+
+Sample Output:
+7
+
+Explanation:
+Three subarrays of size 2, their sum are 4, 7, -1
+
+
+Solution:
+
+Total Number Of Subarrays in an Array of Size N = N*(N+1)/2
+
+Number Of Subarrays of Size K in an Array of Size N = N-K+1
+OR
+Number of Sliding Windows os Size K in an Array of Size N = N-K+1
+
+Understanding:
+
+a = [-1 5 2 -3]
+K = 2
+
+
+Subarrays: Sum
+
+[-1 5] = 4
+[5 2] = 7 : MAX
+[2 -3] = 1
+
+
+
+Solutions:
+
+(1) Brute Force: Two Nested Loops
+
+Generate All Subarray of Size K and find the max Sum:
+
+TC: O(N^2)
+SC: O(1)
+
+(2) Optimised Solution: Single Loop
+
+
+[-1 5 2 -3]
+K = 2
+
+Subarrays:
+
+First Subarray: [-1 5] 
+CODE: for (i=0; i<K; i++)
+
+Other Subarrays:
+
+
+[0.1....k..k+1........]
+
+First Subarray: arr[0...k]
+Next Subarray: Remove 0 and add 1
+            arr[1...k+1]
+
+Next: arr[2...k+2]
+
+
+
+
+arr = [-1 5 2 -3]
+K = 2
+
+
+Subarrays: Sum
+[-1 5] = 4
+[5 2] = 7 : MAX
+[2 -3] = -1
+
+
+CODE:
+public static int maxSum(int arr[], int n, int k)
+    {
+        int res = 0;
+        for (int i=0; i<k; i++) // O(K)
+           res += arr[i]; // res = 4
+
+
+        int currentSum = res; // currentSum = 4
+        for (int i = k; i<n; i++)  // O(N-K)
+        // i = 2; i<4; i++
+        {   // i = 2
+            // currentSum += arr[2] - arr[2-2] = arr[2] - arr[0] = 2-(-1) = 3
+            // currenSum = 4+3 = 7
+
+            // i = 3
+            // currentSum += arr[3] - arr[3-2] = arr[3] - arr[1] = -3-(5) = -8
+            // currenSum = 7-8 = -1
+           
+           currentSum += arr[i] - arr[i-k]; // Remove 0 and add 1
+                                            //  arr[1...k+1]
+           res = Math.max(res, currentSum); // res = max(4, 7) = 7
+        }
+      
+        return res; //7
+    }
+
+
+
+TC: O(N)
+SC: O(1)
+
+
+
+
+
+Q: LC - 152: Maximum Product Subarray
+https://leetcode.com/problems/maximum-product-subarray/
+
+Given an integer array nums, find a contiguous non-empty subarray within the array that has the largest product, and return the product.
+
+The test cases are generated so that the answer will fit in a 32-bit integer.
+
+A subarray is a contiguous subsequence of the array.
+
+ 
+
+Example 1:
+
+Input: nums = [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+
+Example 2:
+
+Input: nums = [-2,0,-1]
+Output: 0
+Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+ 
+
+Constraints:
+
+1 <= nums.length <= 2 * 104
+-10 <= nums[i] <= 10
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+
+
+Input: nums = [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+
+
+
+
+Subarray: Product
+
+[2 3]     = 6
+[2 3 -2]  = -12
+[2 3 -2 4] = -48
+
+
+[3 -2]   = -6
+[3 -2 4]  = -24
+
+[-2 4]  = -8
+
+MaxAns = 6
+
+
+
+ public int maxProduct(int[] nums) 
+ {
+        
+}
+
+
+Solution:
+
+
+(1) Brute Force: Two Nested Loops
+
+- Generate All Subarrays 
+- Calculate Prod of All Subarrays
+- Find Max
+
+CODE:
+
+for (int i = 0; i < n; i++)
+    {
+        int mul = nums[i];
+        for (int j = i + 1; j < n; j++)
+        {
+            result = max(result, mul);
+            mul *= nums[j];
+        }
+        result = max(result, mul);
+    }
+    return result;
+}
+
+TC: O(N^2)
+SC: O(1)
+
+
+
+(2) Optimised Solution:
+
+Trick:
+
+
+
+[2,3,-2,4]
+
+
+Subarray:
+
+
+[2 3]
+Prefix Prod : 0
+Suffix Prod:  [-2 4] = -8
+
+
+Max Product = Max(prefix_prod, suffix_prod)
+
+
+
+CODE:
+
+
+
+// Author: @devangs
+// TC: O(N)
+// SC: O(1)
+
+
+
+[2,3,-2,4]
+N = 4
+OP: 6
+
+
+class Solution {
+    public int maxProduct(int[] A) 
+    {
+        int len = A.length;
+        int prod = 1;
+        int max = Integer.MIN_VALUE;
+        int i = 0;
+        
+        for (i=0; i<len; i++)
+        {
+    // prefix_prod = prefix_prod * A[i]: Multiply from Beginning
+            max = Math.max(prod*=A[i], max); //max = 2, 6, -12, -48: max = 6 
+            
+            // Edge Case for 0 in Subarray
+            if (A[i] == 0)
+                prod = 1;            
+        }
+        
+        prod = 1;
+        
+        for (i=len-1; i>=0; i--)
+        {
+     // suffix_prod = sufix_prod * A[n-i-1]: Multiply from End
+            max = Math.max(prod*=A[i], max); // max = 4, -8, -24, -48: max = 4
+            
+            // Edge Case for 0 in Subarray
+            if (A[i] == 0)
+                prod = 1; 
+        }
+        
+        return max; // max(6,4) = 6
+    }
+}
+
+
+
+
+
+
+
+
+Date : 31st May 2022
+Mentor: DEVANG SHARMA
+Batch: March Batch 2 - DRACO
+
+
+Agenda:
+
+- Introduction to DP
+- DP vs Backtracking vs Greedy
+- DP vs Recursion- Real Life Example 
+
+
+Questions
+- Removing Chocolates- Paypal: 
+- Uncertain Steps- Google: 
+- max Steps - Amazon: 
+- [Adobe] Q: Variation of Sum of Numbers- 1,3,5: 
+
+
+2D DP:
+- Goldmine- Microsoft
+- Maximum size square sub-matrix with all 1s- Paypal
+
+- OOPS
+- Quick Sort
+- Assignment Questions
+
+"Please Type 'Hi' in the Chat Box if you have joined and Can See this Screen".
+
+
+
+
+
+
+Syllabus:
+
+DONE:  (70%)
+- Arrays
+- Matrices
+- Strings
+- Recursion
+- XOR and Bit Manipulation
+- Search
+- Stacks
+- Queues
+- Linked Lists:
+- Sorting
+
+
+30%:
+
+DP : Started
+Backtracking
+Trees
+Graphs
+
+
+
+
+
+Agenda: Dynamic Programming (DP)
+
+- DP vs Backtracking vs Greedy
+
+
+DP:
+- Optimisation Over Recursion
+- Storing the Results of previous states to avoid recalculating
+
+Backtracking:
+- Optimisation Over Recursion
+- Does Not Store Any State
+- Find All Possible Answers
+
+Greedy:
+- Find me the BEST Solution Now
+- DONT THINK ABOUT FUTURE
+
+
+
+
+
+Eg:
+
+
+Given a Matrix, 
+Calculate Max Gold Coins in the Matrix.
+
+
+Constraints: Right or Down
+
+[
+S: 1  10  20
+   100 1000 25
+   70  80   90: D 
+]
+
+
+S- D Path?
+
+
+1 10 1000 25 90: VALID
+1 10 1000 80 90: VALID
+1 100 1000 80 90: VALID: ANS
+
+
+
+
+DP: Find All S-D Valid Path and then Check for Maximum
+
+Greedy: 
+
+You are 1: 10 or 100
+
+According to Greedy, 
+ALWAYS go to 100 because MAX(10,100) = 100
+
+
+At Every Step, Choose the BEST SOLUTION there, 
+DONT THINK ABOUT FUTURE
+
+
+
+
+WORKING:
+
+[
+S: 1  10  20
+   100 1000 25
+   70  80   90: D 
+]
+
+
+Correct OP: 1 100 1000 80 90
+
+Greedy OP: 1 100 1000 80 90
+
+
+
+NOT WORKING:
+
+[
+S: 1  10  2000
+   100 1000 25
+   70  80   90: D 
+]
+
+
+
+As Per Greedy,
+
+At 1: Select 100
+After Reaching 100, Never be able to reach 2000
+
+
+Greedy does not give correct answer Always.
+
+
+
+
+Dynamic Programming (DP)
+
+
+For any DS/Algo:
+- What (Use Case/Problem)
+- Why (Applications)
+- How (Coding/Implementation)
+
+
+What?
+
+- Optimisation Over Recursion by "Storing the State Results to Avoid Calculating Again and Again"
+
+Why?
+
+Exponential Time Complexity ---> Polynomial Time
+(Recursive)                      (DP)
+
+O(2^N) --> O(N)
+
+
+State Variables:
+Number of Variables Determining the State of DP
+
+arr =  [10 20 30 40 50]
+index = [0 1 2 3 4]
+
+arr[index] = val: 1 State Variable: 1 D DP
+
+
+mat = 
+[
+[1 2 3]
+[4 5 6]
+[7 8 9]
+]
+
+mat[row][col] -> Uniquley Identify a Value: 2 State Variables: 2 D DP
+
+
+
+1-D DP: State Depends on 1 Variables
+Eg: Fibbonacci Numbers/Factorial
+
+
+2-D DP: State Depends on 2 Variables
+Eg: 0-1 Knapsack Problem
+
+
+3-D DP: State Depends on 3 Variables
+
+House of Robbers-3: LC Premium
+Round H: GKS 2019
+
+
+
+
+
+Fibbonacci Series
+
+0 1 1 2 3 5 8 13 21.....
+
+
+fib(n) = fib(n-1) + fib(n-2)
+
+Nth Term = (N-1)th Term + (N-2)th Term
+
+
+
+Take N = 5
+
+fib(5) = fib(4) + fib(3)
+fib(4) = fib(3) + fib(2)
+fib(3) = fib(2) + fib(1)
+
+.........................
+
+first = 0
+second = 1
+
+for (i = 2)..
+    a[i] = a[i-1] = a[i-2];
+
+
+TREE DIAGRAM:
+
+
+                      5 - YOU: x+y+x = 2*x + y
+              x+y: 4       3 (x)       
+            (x) 3 (y)2    2  1   
+              2  1  1 0  1 0   
+GROUND       1 0  
+
+
+Real Life Example:
+
+(1) Recursion: Elder: Hard Working
+(2) DP: Younger: Lazy but Smart
+
+
+15th Aug:
+Task: Collect Sweets from All Florrs in the Building
+
+
+Recursion: Hard Worker:
+
+Start from Ground Floor: ALWAYS
+
+1st: 0-1
+2nd: 0-1-2
+3rd: 0-1-2-3
+4th: 0-1-2-3-4
+
+
+DP: Smart Worker
+
+Use a Lift
+
+1st: 0-1
+2nd: 1-2
+3rd: 2-3
+4th: 3-4
+
+
+
+Recursion: EVERYTIME leaf to root traversal for Each Node
+
+DP: Reads Values from the stored data
+
+
+
+CODE:
+
+fib(n) = fib(n-1) + fib(n-2)
+
+
+// Recursive Code
+
+int fib(int n)
+{
+    if (n<=1)
+        return n;
+
+    return fib(n-1) + fib(n-2);
+}
+
+TC: O(2^N)
+SC: O(1) - In Memory
+    O(N) - Auxiliary Memory
+
+
+// DP Code
+
+
+int fibdp(int n)
+{
+    int res[n+1]; // Storing the State Results
+    res[0] = 0;
+    res[1] = 1;
+
+    for (i=2; i<=n; i++)
+        res[i] = res[i-1] + res[i-2];
+
+    return res[n]; // Nth Fibonacci Number
+}
+
+TC:  O(N)
+SC:  O(N)
+
+
+
+0 1 1 2 3 5 8 13 21.....
+
+Calculate fib(3):
+
+Recursion: 0 1 1 2
+DP: 1+1 = 2 = fib(2) + fib(1)
+
+
+
+
+
+DP: 
+
+Store the Results of previous subproblems so that it can be used again.
+
+
+NO NEED TO RE-CALCULATE AGAIN AND AGAIN
+
+
+
+
+
+
+IMP: 
+
+How to Solve Any DP Question in World?
+
+
+
+(1) Identify:
+
+Maximum, Minimum, Shortest, Largest, Smallest, Number of Ways, 
+Count, Permutations etc etc - Mathematical Operations -- DP
+
+Eg:
+
+"Longest" Common Subsequence (LCS) between two Strings - DP
+Underlying Algo: DP
+
+Keywords: Underlying Algo
+Constraints: TC and SC
+
+(2) Decide a State Expression
+Shortcut: Replace N with K
+
+state(k) = ?
+NOTE: ALWAYS MENTIONED IN THE QUESTION
+
+(3) Formulate a State Relation - IMP
+
+- How does the current state result relates to previous state results
+
+
+state(k) ----> state(k-1) or state(k-2) etc
+
+
+(4) Optimisation - Memorisation/Memoisation (Top Down/Bottom Up)
+
+Higher Order DP: 2D and Above
+
+
+
+
+
+
+
+
+
+Q: [Amazon] LC - 70: Climbing Stairs
+https://leetcode.com/problems/climbing-stairs/
+
+You are climbing a staircase. 
+It takes n steps to reach the top.
+
+Each time you can either climb 1 or 2 steps. 
+In how many distinct ways can you climb to the top?
+
+ 
+
+Example 1:
+
+Input: n = 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+
+Example 2:
+
+Input: n = 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+ 
+
+Constraints:
+
+1 <= n <= 45
+
+
+
+Solution:
+
+
+(1) Identify - DONE 
+"How many Ways" - DP
+
+
+(2) Decide a State Expression
+Shortcut: Replace N with K
+
+state(k) = Number of Ways to reach Kth Stair Using 1 or 2 Step
+
+Answer = state(N) = Number of Ways to reach Nth Stair Using 1 or 2 Step
+
+NOTE: ALWAYS MENTIONED IN THE QUESTION
+
+
+
+
+(3) Formulate a State Relation - IMP
+
+- How does the current state result relates to previous state results
+
+state(k) = state(k-1) + state(k-2)        
+
+
+
+
+
+Reach 5th Stair:
+
+4th Stair: 1 Step
+3rd Stair: 2 Steps
+
+
++: OR
+*: AND
+
+Number of Ways to reach 5th Stair
+= Number of Ways to reach 4th Stair
+ + (OR)
+ Number of Ways to reach 3rd Stair
+
+
+
+state(5) = state(4) + state(3)
+        = state(5-1) + state(5-2)
+
+
+state(k) = state(k-1) + state(k-2)        
+
+fib(n) = fib(n-1) + fib(n-2)
+
+
+REC: TLE
+DP: Pass All TC
+
+
+
+
+
+Variations:
+
+(1) Ground Stair ---> Nth Stair: Climb Up 1/2 Step at A Time
+(0 to N Using 1 Or 2)
+
+(2) Nth Stair ---> Ground Stair: Climb Down 1/2 Step at A Time
+(N to 0 Using 1 or 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+Date : 1st June 2022
+Mentor: DEVANG SHARMA
+Batch: March Batch 2 - DRACO
+
+
+Agenda:
+
+- Introduction to DP- DONE
+- DP vs Backtracking vs Greedy- DONE
+- DP vs Recursion- Real Life Example- DONE
+
+
+Questions
+- Removing Chocolates- Paypal: DONE
+- Uncertain Steps- Google: 
+- max Steps - Amazon: DONE
+- [Adobe] Q: Variation of Sum of Numbers- 1,3,5: DONE
+
+
+2D DP:
+- Goldmine- Microsoft
+- Maximum size square sub-matrix with all 1s- Paypal
+
+- OOPS
+- Quick Sort
+- Assignment Questions
+
+"Please Type 'Hi' in the Chat Box if you have joined and Can See this Screen".
+
+
+
+
+
+N Values, All Unique
+Total Number of Permutations (Ways) = N!
+
+
+N Values, K values are Repeated, 
+Total Number of Permutations (Ways) = N!/K!
+
+
+[1 2 3] N =3, K = 0
+
+Total Ways = 3!= 6
+
+[1 2 3]
+[1 3 2]
+[2 1 3]
+[2 3 1]
+[3 1 2]
+[3 2 1]
+
+
+
+Q-2: [Adobe] "Number of Ways" to make N as sum of {1,2}
+
+- All Permutations and Combinations are Allowed
+
+
+Eg: N = 5
+OP: 8
+
+Ways: 
+
+[1 1 1 1 1] - 1 Way
+[2 2 1] - 3!/2!= 3 Ways
+[2 1 2]
+[1 2 2]
+[1 1 1 2] - 4!/3! = 4
+[1 2 1 1]
+[1 1 2 1]
+[2 1 1 1]
+
+
+OP: 8
+
+
+
+
+Solution:
+
+
+(1) Identify - DONE 
+"Number of Ways" - DP
+
+
+(2) Decide a State Expression
+Shortcut: Replace N with K
+
+Answer = state(N) = Number of Ways to make N as sum of {1,2}
+
+state(k) = Number of Ways to make K as sum of {1,2}
+
+
+NOTE: ALWAYS MENTIONED IN THE QUESTION
+
+
+
+(3) Formulate a State Relation - IMP
+
+- How does the current state result relates to previous state results
+
+state(k) =  state(k-1) + state(k-2)
+
+
+
+
+
+
+Make 5 as sum of 1 or 2:
+
+
+5
+= 4 + 1 
+   OR
+  3 + 2 
+
+
+
+state(5) = state(4) + state(3)
+        = state(5-1) + state(5-2)
+
+state(k) = state(k-1) + state(k-2)
+
+
+state(1) = 1 //[1]
+state(2) =  2 //[1,1], [2]
+state(3) = 2+1 = 3 
+state(4) = 3+2 = 5 
+state(5) = 5+3 = 8: ANS     
+
+
+
+CODE:
+
+int solution(int n)
+{
+    int res[n+1]; // Storing the State Results
+    res[0] = 0;
+    res[1] = 1;
+
+    for (i=2; i<=n; i++)
+        res[i] = res[i-1] + res[i-2];
+
+    return res[n]; // Nth Number as Sum of {1,2}
+}
+
+TC:  O(N)
+SC:  O(N)
+
+
+
+- Fibbonacci
+- Max Steps: Top to Bottom
+- Max Steps: Bottom to Top
+- 0 to N as sum of {1,2}
+- N to 0 as sum of {1,2}
+
+
+
+- SAME QUESTIONS
+
+
+
+
+
+
+
+Q-3: [Paypal] Removing chocolates
+
+
+A box contains a number of chocolates that can only be removed 1 at a time or 3 at a a time. 
+"How many ways" can the box be emptied?
+
+The answer can be very large so return it modulo of 10^9+7
+
+For example, there are n = 7 chocolates initially. 
+They can be removed nine ways as follows:
+
+(1,1,1,1,1,1,1)
+(1,1,1,1,3) - 5!/4!= 5
+(1,1,1,3,1)
+(1,1,3,1,1)
+(1,3,1,1,1)
+(3,1,1,1,1)
+(1,3,3) - 3!/2!= 3
+(3,1,3)
+(3,3,1)
+
+Input format: Single line represents the no of chocolates in the box.
+
+Output format: The number of ways of removing the chocolates modulo 10^9 + 7
+
+Constraints:
+
+1 <= n <= 10^9
+
+Sample Input 1 :
+
+1
+Sample Output 1 :
+
+1
+Explanation:: There is only one way to remove a chocolate, so
+
+ans = 1 % 1000000007 = 1
+Sample Input 2 :
+
+3
+Sample Output 2 :
+
+2
+Explanation: There are two ways to remove all the chocolates.
+
+remove all 3 at once,
+remove one after the other, so
+ans = 2 % 1000000007 = 2.
+
+
+
+
+
+
+
+
+
+
+Solution:
+
+N ----> 0 by Removing {1,3}
+
+OR
+
+0 ----> N by Adding {1,3}
+
+
+(1) Identify - DONE
+"How many ways" - DP
+
+(2) state(n) = Number of Ways to remove N Chocolates by removing 1 or 3 at a time
+
+state(k) = Number of Ways to remove K Chocolates by removing 1 or 3 at a time
+
+
+(3) state(k) = state(k-1) + state(k-3)
+
+
+10 Chocolates 
+= 9 Chocolates (Removing 1)
+ +  
+ 7 chocolates (Removing 3)
+
+
+
+                                10    
+                             9      7   
+                          8  6    6  4   
+
+                            ...0
+
+
+state(10) = state(10-1) + state(10-3)
+
+state(k) = state(k-1) + state(k-3)
+
+
+CODE:
+
+state(k) = state(k-1) + state(k-2)
+- Need to Initialise First 2 Values
+
+
+state(k) = state(k-1) + state(k-3)
+- Need to Initialise First 3 Values
+
+
+state(k) = state(k-1) + state(k-p)
+- Need to Initialise First p Values
+
+
+
+1 or 3 Chocolates at a Time
+
+res[1] = 1 //[1]
+res[2] = 1 //[1,1]
+res[3] = 2 // [1,1,1], [3]
+
+res[4] = 3  // [1,1,1,1], [1,3], [3,1]
+       = res[4-1] + res[4-3]
+       = 2 + 1 = 3
+
+
+mod = 1000000007
+
+// Initialise First 3 Values
+res = [1 1 2] 
+
+
+for (i=3; i<=n; i++)
+{
+res[i] = ((res[i-1] % mod) + (res[i-3] % mod)) % mod;
+}
+
+
+(a + b) mod m = (a mod m + b mod m) mod m
+
+
+
+CODE:
+
+
+
+
+
+import java.io.*;
+import java.util.*;
+
+class Main
+{        
+
+    // state(k) = state(k-1) + state(k-2): Initialise 2 values in DP Ans
+    // state(k) = state(k-1) + state(k-3): Initialise 3 values in DP Ans
+    // state(k) = state(k-1) + state(k-p): Initialise p values in DP Ans
+
+
+    // 1 = [1] - 1 Way
+    // 2 = [1 1] - 1 Way
+    // 3 = [1 1 1], [3]  - 2 Ways
+    
+
+     static int mod = 1000000007;
+
+    static int removingChocolates(int n)
+    {
+        int[] ans = new int[n+1];
+        int i=0;
+        ans[0] = 1;
+        ans[1] = 1;
+        ans[2] = 2;
+        
+        for (i=3; i<=n; i++)
+        {
+            ans[i] = ((ans[i-1] % mod) + (ans[i-3] % mod)) % mod;
+        }
+        
+        return ans[n-1];
+        
+    }
+    
+    public static void main(String[] args)
+    {
+    Scanner s = new Scanner(System.in);
+    int n = s.nextInt();
+    System.out.println(removingChocolates(n));
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Date : 2nd June 2022
+Mentor: DEVANG SHARMA
+Batch: March Batch 2 - DRACO
+
+
+Agenda:
+
+- Introduction to DP- DONE
+- DP vs Backtracking vs Greedy- DONE
+- DP vs Recursion- Real Life Example- DONE
+
+
+Questions
+- Removing Chocolates- Paypal: DONE
+- Uncertain Steps- Google: 
+- max Steps - Amazon: DONE
+- [Adobe] Q: Variation of Sum of Numbers- 1,3,5: DONE
+
+
+2D DP:
+- Goldmine- Microsoft
+- Maximum size square sub-matrix with all 1s- Paypal
+
+- OOPS
+- Quick Sort
+- Assignment Questions
+
+"Please Type 'Hi' in the Chat Box if you have joined and Can See this Screen".
+
+
+
+
+
+
+
+
+
+Q-4: [Microsoft]: Variation of Sum of Numbers
+
+Given 3 Numbers {1,3,5}
+Tell me the "Total Number of Ways" to form a number N
+using sum of three Numbers {1,3,5}
+
+Note: 
+
+Repetitions and Arrangements are Allowed
+
+IP: 6
+OP: 8 
+
+[1 1 1 1 1 1]
+[1 5]
+[1 1 1 3] -4!/3! = 4
+[1 1 3 1]
+[1 3 1 1]
+[3 1 1 1]
+[3 3]
+[5 1]
+
+Total = 8 Ways
+
+
+
+Solution:
+
+(1) Identify: 
+"Total Number of Ways" - DONE
+
+(2) Define State Expression:
+
+state(N) = Number of Ways to make "N" using sum of {1,3,5}
+
+state(K) = Number of Ways to make "K" using sum of {1,3,5}
+
+(3) Formulate the State Relation:
+
+
+To make 7 using {1,3,5}
+
+6th: 6+1 = 7
+4th: 4+3 = 7
+2nd: 2+5 = 7
+
+
+state(7) = state(7-1) + state(7-3) + state(7-5)
+
+
+state(k) = state(k-1) + state(k-3) + state(k-5)
+
+
+                     7
+               2     4    6     
+              1     1 3   1 3 5
+
+
+2^0 + 2^1 + 2^2 +......= 2^n
+
+
+
+Rec: O(3^N) : TLE
+
+DP: O(N): All TC Passed
+
+
+
+
+
+
+
+Q-5: [Google] Uncertian Steps
+
+
+Codu is trying to go down stairs from his building to ground floor.
+
+
+He can go 3 ways:
+
+- Walk 1 step at a time.
+- Extend his legs and go 2 steps at a time.
+- Jump down 3 steps at a time.
+
+Given n steps, calculate the number of possible ways to reach the ground floor, 
+provided he can jump 3 steps at most once during this process.
+
+That is, he can jump down 3 steps only once, but at any time, if he wishes, while walking down the stairs.
+
+Constraints
+1 <= N <= 1000000.
+
+Input Format
+
+Single Integer denoting the number of Steps, N
+
+Output
+
+Number of ways to reach ground floor.
+As the number can be huge, give output modulo 1000000007.
+
+Example Input 1
+4
+Output
+7
+
+Explanation
+1, 1, 1, 1
+1, 2, 1
+1, 1, 2
+1, 3
+2, 1, 1
+2, 2
+3, 1
+
+Number of ways = 7.
+
+
+
+
+Solution:
+
+
+
+
+Trick:
+
+1: Infinite
+2: Infinite
+3: 0 or 1 Time (At Most Once)
+
+
+
+
+state(k) = state(k-1) + state(k-2) + state(k-3)
+- Infinite 1,2 and 3
+
+
+
+
+Solution:
+
+
+int cnt = 0;
+
+if (cnt<1)
+{
+// Counting Combination of {1,2,3}
+state(k) = state(k-1) + state(k-2) + state(k-3)
+++cnt;
+}
+
+else
+{
+// Counting Combination of {1,2}
+state(k) = state(k-1) + state(k-2)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q-6: [Google] 2D DP - Goldmine
+
+
+Matrix: MxN
+
+Start: First Column, Any Row
+End: Last Column, Any Row
+
+
+Directions: Right, Right Up, Right Down
+
+
+Task: Collect "Maximum Gold Coins"
+
+
+
+
+IP:
+
+m = 4
+n = 4
+
+
+1 3 1 5
+2 2 4 1
+5 0 2 3
+0 6 1 2
+
+OP: 
+16
+
+
+Current position: 4
+
+Right : 1 (East)
+Right Up: 5 (North East)
+Right Down: 3 (South East)
+
+
+5-6-2-4-5: INVALID
+
+5-2-4-5: VALID: = 16: ANS
+
+5-6-2-3 = VALID: = 16: ANS
+
+5 0 6 1 2 4 1 5: INVALID
+
+5 6 2 4 1 5: INVALID
+
+
+OP: 16
+
+
+DP: First Find All Ways ---> Select the Max
+
+
+
+
+
+
+Solution:
+
+
+(1) Identify: DONE
+
+"Maximum Gold Coins"
+
+
+(2) Decide a State Expression:
+
+
+state(i,j) = Maximum Amount of Gold Coins Collected till (i,j) by travelling
+            RIGHT, RIGHT UP or RIGHT DOWN
+
+
+(3) Formulate the State Relation:
+
+i,j --> Right, Right Up or Right Down
+
+
+Ans = MAX(Right, Right Up, Right Down)
+return Ans;
+
+
+
+- Direction Matrix/ Direction Map
+
+
+curr: i, j
+
+Right: 
+
+Right Up: 
+
+Right Down:
+
+
+
+
+
+1 3 1 5
+2 2 4 1
+5 0 2 3
+0 6 1 2
+
+
+Curr Element: 4: [1][2]
+
+Up: i-1, j: row-1, col
+
+Down: i+1, j: row+1, col
+
+Left: i, j-1: row, col-1
+
+Right: i, j+1: row, col+1
+
+Right Up: i-1, j+1: row-1, col+1
+
+Right Down: i+1 , j+1: row+1, col+1
+
+
+
+
+mat[i][j] = Math.max(mat[i][j+1], mat[i-1][j+1], mat[i+1][j+1]);
+                    RIGHT          RIGHT UP          RIGHT DOWN
+                
+
+
+CODE: 
+
+// "Zindagi Mein Harta Wahi Hai, Jisme Jitne Ki Bhookh Na Ho....- Alpha Droer: 22/05/2021"
+// Author: @devangs
+// T: O(M*N)
+// S: O(M*N)
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    static final int MAX = 100;
+      
+    static int getMaxGold(int gold[][], int m, int n)
+    {
+        int goldTable[][] = new int[m][n];// dp[m][n]
+// goldTable[i][j] = Max No of Gold Coins Collected TILL (i,j) by Traversing in 3 Directions
+//  Directions = [Right, Right Up, RIght Down]
+    
+          
+        for(int[] rows:goldTable)
+            Arrays.fill(rows, 0);
+      
+        for (int col = n-1; col >= 0; col--)
+        {
+            for (int row = 0; row < m; row++)
+            {
+            /*
+            
+            Curr: i,j
+            
+            right: i,j+1
+            right up: i-1, j+1
+            right down: i+1, j+1
+            
+            */
+                  
+            // (i, j+1)
+            int right = (col == n-1) ? 0 : goldTable[row][col+1]; 
+      
+            // (i-1, j+1)
+            int right_up = (row == 0 || col == n-1) ? 0 : 
+                goldTable[row-1][col+1];
+      
+            // (i+1, j+1)
+            int right_down = (row == m-1 || col == n-1) ? 0 :
+                goldTable[row+1][col+1];
+      
+                // Max gold collected from taking
+                // either of the above 3 paths
+            goldTable[row][col] = 
+                gold[row][col] + Math.max(right, 
+                            Math.max(right_up, right_down));
+                                                          
+            }
+        }
+      
+
+        int res = goldTable[0][0];
+          
+        for (int i = 1; i < m; i++)
+            res = Math.max(res, goldTable[i][0]);
+              
+        return res;
+    }
+    
+    public static void main(String[] args) 
+    {
+    Scanner s = new Scanner(System.in);
+    int tc,m,n,i=0,j=0;
+    tc = s.nextInt();  
+    int[][] gold= new int[MAX][MAX];
+
+    while (tc-- > 0)
+    {
+        m = s.nextInt();
+        n = s.nextInt();
+        
+        for (i=0; i<m; i++)
+        {
+            for (j=0; j<n; j++)
+            {
+                gold[i][j] = s.nextInt();
+            }
+        }
+        
+        System.out.println(getMaxGold(gold, m, n));
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+Date : 7th June 2022
+Mentor: DEVANG SHARMA
+Batch: March Batch 2 - DRACO + AURIGA
+
+Agenda:
+
+DONE:
+- Introduction to DP- DONE
+- DP vs Backtracking vs Greedy- DONE
+- DP vs Recursion- Real Life Example- DONE
+Questions
+- Removing Chocolates- Paypal: DONE
+- Uncertain Steps- Google: 
+- max Steps - Amazon: DONE
+- [Adobe] Q: Variation of Sum of Numbers- 1,3,5: DONE
+2D DP:
+- Goldmine- Microsoft
+- Maximum size square sub-matrix with all 1s- Paypal
+
+TODO:
+
+- Assignment Questions
+- Rev Strings
+- Special Number (contest)
+- FLAMES ?
+- Leetcode: Group Anagrams: https://leetcode.com/problems/group-anagrams/
+- Leetcode: Valid Palindrome: https://leetcode.com/problems/valid-palindrome/
+- OOPS
+- Quick Sort
+
+"Please Type 'Hi' in the Chat Box if you have joined and Can See this Screen".
+
+
+
+Q: String Basics - In Class - Rev Strings
+
+
+
+Rev Strings
+
+Time Limit: 2 sec
+
+Memory Limit: 128000 kB
+
+Problem Statement
+You are given a string your task is to reverse the given string.
+Input
+The first line of the input contains a string.
+
+Constraints:-
+1 <= string length <= 100
+String contains only lowercase english letters
+
+Output
+The output should contain reverse of the input string.
+
+Example
+Sample Input
+abc
+
+Sample Output
+cba
+
+
+
+30 Sec, 
+Approach/Code, TC, SC
+
+
+Brute Force -> Optimised
+
+Solution:
+
+
+(1) Create Extra String, Run Loop from Right to Left
+
+string temp = "";
+for (i=n-1; i>=0; i--)
+    temp += s.charAt(i);
+
+
+T: O(N)
+S: O(N)
+
+(2) Swapping
+
+for (i=0; i<n/2; i++)
+    swap(s.charAt(i), s.charAt(n-i-1));
+
+"abcde"
+
+TC: O(N/2)
+SC: O(1) - In Place Solution
+
+
+(3) Two Pointer
+
+l = 0, r = n-1
+
+while (l<=r)
+{
+    swap(s.charAt(l), s.charAt(r));
+    l++;
+    r--;
+}
+
+TC: O(N/2)
+SC: O(1)
+
+(4) Simple Reverse Loop
+
+
+for (i=n-1; i>=0;i--) // N times - O(N)
+{
+    System.out.print(s.charAt(i));
+}
+
+T: O(N)
+S: O(1)
+
+(5) Using Reverse Method
+
+
+String s = "abcd";
+s.reverse(); --> No Function
+
+
+StringBuffer s2 = new StringBuffer(s);
+s2.reverse();
+
+
+
+StringBuilder s2 = new StringBuilder(s);
+s2.reverse();
+return s2.toString();
+
+
+
+TC: O(N)
+SC: O(N)
+
+
+(6) Using Stack:
+
+T: O(N)
+S: O(N)
+
+Stack: 1 2 3 4 5
+
+5 - TOP
+4
+3
+2
+1
+
+OP: 5 4 3 2 1
+
+Trick:
+
+Order of Insertion == Reverse of Order of Deletion --> Solved By Stack
+
+
+(1) Balanced Parentheses {[ ==]}, Order of Opening == Reverse of Order of Closing: STACk
+(2) NGE: Next Greater Element
+(3) Min Add to Make Valid Parenthesis
+(4) Daily Temperatures
+
+
+
+
+
+
+
+
+
+
+
+Q: String Basics - In Class - Special Number (contest)
+
+
+Special Number (contest)
+Easy
+
+Time Limit: 2 sec
+Memory Limit: 128000 kB
+Problem Statement
+Given a number N, find out whether it is divisible by 3.
+Input
+The first and the only line of input contains the number N.
+
+Constraints
+1 <= N <= 10^100000 (N may consist of 100001 digits).
+
+
+No usual datatype will be able to input such large number.
+Output
+Output "Yes" if the number is divisible by 3, else output "No".
+Example
+Sample Input 1
+14
+
+Sample Output 1
+No
+
+Sample Input 2
+1234567890123456789012345678901234567890
+
+Sample Output 2
+Yes
+
+Explanation: In the first sample case, the number is not divisible by 3, 
+while in the second sample case, it is divisible by 3. (We know how weird this explanation is, but ok).
+
+
+
+
+Solution:
+
+Rule of Divisibility of 3:
+
+Any Number Divisible by 3
+= Sum of Digits as Multiple of 3
+
+"12345" + "67" : Concatenate
+= "123467"
+
+
+Approach:
+(1) Input String: Range is Very Large
+(2) Iterate Over String, Find Int value and add
+
+for (i=0; i<n; i++)
+    sum+= (s.charAt(i) - '0');
+
+
+if (sum %3 == 0)
+    s.o.p("Yes");
+else
+    s.o.p("No");
+
+
+
+"12345"
+
+int sum =0;
+s.charAt(0) = '1'-'0' = 1
+
+sum+= s.charAt(0) : Error
+int and char mismatch
+
+
+
+a: 97
+b: 98
+
+
+
+
+
+
+
+
+
+Q: String Basics - In Class - FLAMES ?
+
+
+FLAMES ?
+
+Time Limit: 2 sec
+Memory Limit: 128000 kB
+
+Problem Statement
+They say friendship is greater than love. Why not play the famous game "FLAMES".
+The rules are super simple. Given two strings (all lowercase), remove all the letters that are common to both the strings from both the strings. You cannot erase two characters corresponding to one character.
+
+For example, in the case
+String 1: saumya
+String 2: ansh
+You can remove only 1 'a' and 1 's' from both the strings.
+
+
+Remaining strings are:
+String 1: umya
+String 2: nh
+
+Now all you need to do is find the sum of the remaining strings length % 6.
+
+Output:
+If obtained value is 1, output "Friends"
+If obtained value is 2, output "Love"
+If obtained value is 3, output "Affection"
+If obtained value is 4, output "Marriage"
+If obtained value is 5, output "Enemy"
+If obtained value is 0, output "Siblings"
+
+Input
+You will be given two strings on different lines.
+
+Constraints
+1 <= Length of both the strings <= 100000
+
+Output
+Output a single string, the result of FLAMES test.
+
+
+Example
+
+Sample Input:-
+saumya
+ansh
+
+Sample Output:-
+Siblings
+
+Explanation:-
+after deleting characters :-
+str1 = umya
+str2 = nh
+sum = 4+2
+sum%6=0
+
+
+
+
+
+
+
+
+Approach:
+
+s1, s2: Common Elements
+Delete Common Elements
+Count sum of length
+Check sum%6
+
+
+
+Solution:
+
+
+
+(1) Brute Force: O(M*N)
+
+s1: "saumya"
+s2: "ansh"
+
+For Each char in s1, 
+Iterate All chars in s2
+
+
+
+(2) Storing Mapping: O(M+N)
+
+"saumya"
+"ansh"
+
+
+Map1:
+
+s: 1
+a: 2
+u: 1
+m: 1
+y: 1
+
+Map2:
+
+a: 1
+n: 1
+s: 1
+h: 1
+
+
+
+
+Math.abs(Map1[i]-Map2[i])
+
+s: 0
+a: 1
+u: 1
+m: 1
+y: 1
+n: 1
+h: 1
+
+Total = 6
+
+
+
+sum += Math.abs(Map1[i]-Map2[i]);
+
+sum % 6 --> FLAMES
+
+
+
+DS for Mapping?
+(1) Map: HashMap, LinkedHashMap, TreeMap
+- Order Not Required, Only Diff is Required
+
+
+(2) Array Can be Used
+
+s1: lower emglish albhabet: 26 chars
+s2: lower emglish albhabet: 26 chars
+
+
+int freq1[26]
+int freq2[26]
+
+"saumya"
+"ansh"
+
+
+freq1:
+
+s: 1
+a: 2
+u: 1
+m: 1
+y: 1
+
+freq2:
+
+a: 1
+n: 1
+s: 1
+h: 1
+
+
+"abcda"
+int arr[] = new int[26];
+HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+
+SC: Array: O(26)
+SC: Map: O(4)
+
+Map:
+
+a: 2
+b: 1
+c: 1
+d: 1
+
+map.size() = 4
+
+
+
+
+map.size() = O(K)
+K <= 26
+
+arr size = 26: ALWAYS
+O(26)
+
+
+
+
+(2) Optimising sum % 6 --> FLAMES
+
+
+(A) Switch: 6+1(default) Conditions
+T: O(1)
+S: O(1)
+
+(B) N % K = Range of OP: 0 to K-1
+
+    sum % 6 : 0 to 5
+
+
+string ans[6] = ["F", "L"...."S"]
+
+return ans[sum%6];
+
+T: O(1)
+
+arr[idx] = O(1)
+
+S: O(6)
+
+
+
+
+CODE:
+
+import java.io.*;
+import java.util.*;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner s = new Scanner(System.in);
+        String s1 = s.next();
+        String s2 = s.next();
+        String[] a= new String[6];
+        a[1]= "Friends";
+        a[2]= "Love";
+        a[3]="Affection";
+        a[4]= "Marriage";
+        a[5]= "Enemy";
+        a[0]= "Siblings";
+
+        int[] freq1= new int[26];
+        int[] freq2= new int[26];
+        int i=0;
+
+        for(i=0;i<26;i++)
+        {
+            freq1[i]=0;
+            freq2[i]=0;
+        }
+
+        for(i=0;i<s1.length();i++)
+        {
+            freq1[s1.charAt(i)-'a']++;
+        }
+
+        for(i=0;i<s2.length();i++)
+        {
+            freq2[s2.charAt(i)-'a']++;
+        }
+
+        int sum=0;
+
+        for(i=0;i<26;i++)
+        {
+           sum += Math.abs(freq1[i]-freq2[i]);
+        }
+
+        System.out.println(a[sum%6]);
+    }
+}
+
+
+TC: O(26) + O(26) + O(M) + O(N) = O(M+N)
+SC: O(26) + O(26) + O(6)
+
+
+Brute Force Code: O(M*N)
+
+
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) {
+            Scanner sc = new Scanner(System.in);
+            String s1 = sc.nextLine();
+            String s2 = sc.nextLine();
+            int freq1[]=new int[26];
+            int freq2[]=new int[26];
+            for(int i=0;i<s1.length();i++)
+            {
+                freq1[s1.charAt(i)-'a']++;
+            }
+            for(int j=0;j<s2.length();j++)
+            {
+                freq2[s2.charAt(j)-'a']++;
+            }
+            int count=0;
+            for(int i=0;i<26;i++)
+            {
+                if(freq1[i]!=0)
+                {
+                    if(freq2[i]!=0)
+                    {
+                        count +=Math.abs(freq1[i]-freq2[i]);
+                    }
+                    else
+                    {
+                        count +=freq1[i];
+                    }
+                }
+                else
+                {
+                    count +=freq2[i];
+                }
+            }
+            switch(count%6)
+            {
+                case 1:
+                System.out.println("Friends");
+                break;
+                case 2:
+                System.out.println("Love");
+                break;
+                case 3:
+                System.out.println("Affection");
+                break;
+                case 4:
+                System.out.println("Marriage");
+                break;
+                case 5:
+                System.out.println("Enemy");
+                break;
+                default:
+                System.out.println("Siblings");
+            }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q: LC-49: Group Anagrams
+https://leetcode.com/problems/group-anagrams/
+
+
+Given an array of strings strs, group the anagrams together. 
+You can return the answer in any order.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+ 
+
+Example 1:
+
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+Example 2:
+
+Input: strs = [""]
+Output: [[""]]
+
+Example 3:
+
+Input: strs = ["a"]
+Output: [["a"]]
+ 
+
+Constraints:
+
+1 <= strs.length <= 104
+0 <= strs[i].length <= 100
+strs[i] consists of lowercase English letters.
+
+
+
+Definition of Anagrams:
+
+
+
+Anagram: Variation/Permutation of Word
+- All Permutations of characters of a Word
+
+
+Eg: 
+
+cat - tac, cta, act: Anagrams 
+
+rat - rta, tar, tra, atr, art: Anagrams
+
+cat, rat: Not Anagrams
+
+
+
+
+
+CODE:
+
+
+public List<List<String>> groupAnagrams(String[] strs) {
+        
+    }
+
+
+
+
+Solution:
+
+
+"cat", "act"
+
+
+Two Ways:
+(1) Sort 
+
+cat --> act
+act --> act
+
+if s1==s2 after sorting: YES
+
+(2) Map and Frequency
+
+s1
+c: 1
+a: 1
+t: 1
+
+s2
+c: 1
+a: 1
+t: 1
+
+2 Maps Also, map1 == map2
+
+1 Map, All Key Values == 0: YES
+
+
+
+
+Solution:
+
+(1) Sort all the array --> All Strings same: Anagram: O(NlogN)
+
+(2) Map<String, List<String>> map = new Map<String, List<String>>();
+
+If Already exist, append in map
+Else
+Put in Map
+
+"cat", "act", "tca"
+
+act, act, act
+
+Map:
+
+"act": [["cat", "act", "tca"]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

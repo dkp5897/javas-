@@ -26,6 +26,30 @@ public class BoundaryElementInClockwise {
 				
 	}
 
+	// Method-2
+	static void BoundaryTraversal2(int arr[][],int rlen,int clen){
+		int rmin=0,cmin=0;
+		int rmax=rlen-1, cmax=clen-1;
+		// left wall
+		for(int i=rmin, j=cmin;i<rlen;i++){
+			System.out.println(arr[i][j]);
+		}
+		cmin++;
+		// bottom wall
+		for(int i=rmax,j=cmin;j<clen;j++){
+			System.out.println(arr[i][j]);
+		}
+		rmax--;
+		// right wall
+		for(int i=rmax,j=cmax;i>=rmin;i--){
+			System.out.println(arr[i][j]);
+		}
+		cmax--;
+		// top wall
+		for(int i=rmin,j=cmax;j>=cmin;j--){
+			System.out.println(arr[i][j]);
+		}
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int arr[][]
@@ -36,6 +60,7 @@ public class BoundaryElementInClockwise {
 	        int M = arr[0].length;
 	 
 	        // Function Call
-	        BoundaryTraversal(arr, N, M);
+	        // BoundaryTraversal(arr, N, M);
+	        BoundaryTraversal2(arr, N, M);
 	}
 }

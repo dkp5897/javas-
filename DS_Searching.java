@@ -180,7 +180,7 @@
 		Some general time complexities are listed below with the input range for which they are accepted in 
 		competitive programming:     
 
-		O(1) < O(N) < O(N*logN) < O(N*N) < O(N^3)
+		O(1)< O(logN) < O(N) < O(N*logN) < O(N*N) < O(N^3)
 
 
 
@@ -384,7 +384,7 @@
 		Case												Time Complexity
 
 	Best Case													O(1)
-	Average Case												O(log)
+	Average Case												O(logn)
 	Worst Case													O(logn)
 
 

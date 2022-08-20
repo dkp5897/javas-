@@ -13,6 +13,29 @@ public class MatrixMultiplication {
 		}
 	}
 	
+	static void Multiplication1(int mat1[][],int mat2[][]){
+		int rlen1=mat1.length, clen1=mat1[0].length;
+		int rlen2=mat2.length, clen2=mat2[0].length;
+
+		if(clen1!=rlen2){
+			System.out.println("Can't Multiply");
+			return;
+		}
+
+		int prd[][]=new int[rlen1][clen2];
+		for(int i=0;i<prd.length;i++){
+			for(int j=0;j<prd[0].length;j++){
+				for(int k=0;k<clen1;k++)
+				prd[i][j]=mat1[i][k]*mat2[k][j];
+			}
+			
+		}
+		PrintMatrix(prd, rlen1, clen2);
+	}
+
+
+
+
 	static void Multiplication(int mat1[][],int mat2[][])
 	{
 		int r=mat1.length;
@@ -32,15 +55,17 @@ public class MatrixMultiplication {
 		// TODO Auto-generated method stub
 		
 		int [][] mat1= {{1,2,3},{4,5,6},{7,8,9}};
-		int [][] mat2= {{9,8,7},{6,5,4},{3,2,1}};
-	    int row=mat1.length;
-	    int col=mat1[0].length;
+		int [][] mat2= {{9,8},{6,5},{3,2}};
+	    int row1=mat1.length;
+	    int col1=mat1[0].length;
+	    int row2=mat2.length;
+	    int col2=mat2[0].length;
 	    System.out.println("The first Matrix : ");
-	    PrintMatrix(mat1,row,col);
+	    PrintMatrix(mat1,row1,col1);
 	    System.out.println("The Second Matrix : ");
-	    PrintMatrix(mat2,row,col);
+	    PrintMatrix(mat2,row2,col2);
 	    System.out.println("The Multiplication of two Matrixes : ");
-	    Multiplication(mat1, mat2);
+	    Multiplication1(mat1, mat2);
 	  
 
 	}

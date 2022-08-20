@@ -91,7 +91,7 @@ Hash Table:-
 	existing phone number has hash function value equal to the index for the entry. 
 
 	Hash table or hash map is a data structure that stores the keys and their associated values, and hash table uses 
-	a hash function to map keys totheir associated values. 
+	a hash function to map keys to their associated values. 
 	The general convention is that we use a hash table when the number of
 	keys actually stored is small relative to the number of possible keys.
 
@@ -99,7 +99,7 @@ Collisions:-
 
 	Hash functions are used to map each key to a different address space, but practically it is not
 	possible to create such a hash function and the problem is called collision. Collision is the
-	condition where two records are stored in the same location.
+	condition where two records are stored in the same location. 
 
 
 Collision Handling:- 
@@ -1858,6 +1858,52 @@ Output:-
 
 
 
+Qs: fnd friquency of elements in the array
+
+Code:-
+
+// Java program for the above approach
+		import java.util.*;
+		class GFG{
+
+		// Function to count frequencies of array items
+		static void countFreq(int arr[], int n)
+		{
+			HashMap<Integer,Integer> freq = new HashMap<>();
+
+			// Traverse through array elements and
+			// count frequencies
+			for (int i = 0; i < n; i++) {
+			if(freq.containsKey(arr[i])){
+				freq.put(arr[i], freq.get(arr[i])+1);
+			}
+			else{
+				freq.put(arr[i], 1);
+			}
+			}
+
+			// Traverse through map and print frequencies
+			for (Map.Entry<Integer,Integer> x : freq.entrySet())
+			System.out.print(x.getKey()+ " " + x.getValue() +"\n");
+		}
+
+		// Driver Code
+		public static void main(String[] args)
+		{
+			// Given array
+			int arr[] = { 10, 20, 20, 10, 10, 20, 5, 20 };
+			int n = arr.length;
+
+			// Function Call
+			countFreq(arr, n);
+		}
+		}
+
+		Output:-
+		5 1
+		10 3
+		20 4
+
 
 
 										----------:HashMap Vs TreeMap:----------
@@ -2408,6 +2454,7 @@ public class HashSetBasic_2 {
   
         // Iterating over hashSet items
         Iterator<String> i = set.iterator();
+        
   
         // Holds true till there is single element remaining
         while (i.hasNext())

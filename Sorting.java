@@ -7,6 +7,7 @@ There are following Sorting Algorithm:
 (2)	Selection Sort 
 (3)	Insertion Sort
 (4)	Merge Sort 
+(5)	Quick Sort
 
 
 
@@ -25,7 +26,7 @@ Algorithm:
 (4)	If the current element in the inner loop is smaller than its next element, swap the values of the two elements.
 (5)	END
 
-Time Complexity: O(N2)
+Time Complexity: O(N^2)
 
 Code:-
 
@@ -76,7 +77,7 @@ Output:-
 
 (2) Selection Sort:-
 
-In this sorting Algorithm we selects the smallest element and put it at the first array position of the array. 
+In this sorting Algorithm we selects the smallest element and put it at the first position of the array. 
 
 Idea: The inner loop selects the minimum element in the unsorted array and places the elements in increasing order.
 

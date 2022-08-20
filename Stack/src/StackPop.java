@@ -21,6 +21,7 @@ class StackPop{
 
         System.out.println("The poped or deleted element of stack-1: "+stack1.pop());
         System.out.println("The poped or deleted element of stack-2: "+stack2.pop());
+        
         System.out.println("New Stack-1: "+stack1);
         System.out.println("New Stack-2: "+stack2);
     }

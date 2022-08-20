@@ -134,6 +134,7 @@ No.	    Method																								Description
 16	String[] split(String regex)--------->	It returns a split string matching regex.
 
 17	String[] split(String regex, int limit)--------->	It returns a split string matching regex and limit.
+
 18	String intern()--------->	It returns an interned string.
 
 19	int indexOf(int ch)--------->	It returns the specified char value index.
@@ -1276,8 +1277,6 @@ Interview Question and Answer:---
 
 2. What is the difference between String in C language and String in Java?
 
-		If your resume contains something related to the ‘C’ language, they can ask you this question.
-
 		String in Java and C is completely different. In ‘C’ language String is a null-terminated character array.
 
 		In the image given below, I have shown the structure of the string in C and Java.
@@ -1398,9 +1397,12 @@ String thirdString =  new String("Gaurav");
 
 9. Can we compare String using the == operator? What is the risk?
 
-		Yes, of course, we can compare String using the == operator. But when we are comparing string using the == operator, we are comparing their object reference, whether these string variables are pointing towards the same string object or not.
+		Yes, of course, we can compare String using the == operator. But when we are comparing string using the == operator, 
+		we are comparing their object reference, whether these string variables are pointing towards the same string object or 
+		not.
 
-		Most of the time, developers want to compare the content of the strings, but mistakenly they compare strings with == operator, instead of equals() method, which leads to an error.
+		Most of the time, developers want to compare the content of the strings, but mistakenly they compare strings with == 
+		operator, instead of equals() method, which leads to an error.
 
 		Below, I have given a program, which shows the string comparison using the == operator and equals() method.
 
@@ -1666,7 +1668,7 @@ Output:-
 
 
 
-		 * A Java program which checks
+		 /* A Java program which checks
 		 * both ways of string comparison using equals() method.
 		 * 
 		 * This program throws a NullPointerException at second print statement.
@@ -1788,19 +1790,88 @@ Code:-
 					}
 				}
 				return Builder.toString();
-				
 			}
 			
 			public static void main(String[] args) {
-				// TODO Auto-generated method stub
-				Scanner sc=new Scanner(System.in);
-				String str=sc.nextLine();
-				//String Str= "much.very.program.this.like.i";
+				
+				// Scanner sc=new Scanner(System.in);
+				// String str=sc.nextLine();
+				String Str= "much.very.program.this.like.i";
 				System.out.print(ReverseWord(str));
 
 			}
 
 		}
+
+	Output:-
+
+	i.like.this.program.very.much
+
+
+
+Method-2:- to reverse a sentence:-
+
+Code:-// "static void main" must be defined in a public class.
+public class Main {
+    
+    static String reverse(String str){
+        String arr[]=str.split(" ");
+        for(String s:arr){
+            System.out.print(s+" ");
+        }
+        StringBuilder bdr=new StringBuilder("");
+        for(int i=arr.length-1;i>=0;i--){
+            bdr.append(arr[i]);
+            if(i>=0){
+                bdr.append(" ");
+            }
+        }
+        return bdr.toString();
+    }
+        // Method-2
+        
+        static String revrse2(String str){
+            
+            String arr[]=str.split(" ");
+            for(String s:arr){
+            System.out.print(s+" ");
+            }
+            Stack<String> st=new Stack<>();
+            for(String s:arr){
+                st.push(s);
+                }
+            String ans="";
+            for(int i=0;i<arr.length;i++){
+                ans+=st.pop();
+                ans+=" ";
+             }
+            return ans;
+        }
+
+    public static void main(String[] args) {
+        String str= "I love my country";
+        
+        // Method-1
+        String ans=reverse(str);
+         System.out.println();
+         System.out.print(ans);
+        
+        // Method-2
+        System.out.println();
+        String ans2=reverse(str);
+         System.out.println();
+         System.out.print(ans2);        
+    }
+}
+
+Output:-
+
+I love my country 
+country my love I 
+I love my country 
+country my love I 
+
+
 
 
 Method--(2):-
@@ -2174,3 +2245,43 @@ public static int lengthOfLongestSubstring(String s) {
 
 
 
+
+
+
+Qs:- Character Frequency in a string:-
+
+Code:-
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class Duplicate {
+    static void countDuplicateChar(String str){
+        HashMap<Character, Integer> map=new HashMap<>();
+        char arr[]=str.toCharArray();
+        for(char c:arr){
+            if(map.containsKey(c)){
+                map.put(c, map.get(c)+1);
+            }
+            else{
+                map.put(c, 1);
+            }
+        }
+        for(Map.Entry<Character, Integer> entry:map.entrySet()){
+            if(entry.getValue()>1){
+                System.out.println(entry.getKey()+": "+entry.getValue());
+            }
+        }
+    }
+    public static void main(String[] args) {
+        String str="Deepak kumar";
+        countDuplicateChar(str);
+    }
+}
+
+
+Output:-
+a: 2
+e: 2
+k: 2
